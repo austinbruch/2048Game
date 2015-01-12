@@ -175,6 +175,9 @@ public class GameFrame extends JFrame {
 				if(text.length() > 3) {
 					gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 40));
 				}
+				if(text.length() <= 3) {
+					gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 60));
+				}
 				gridButtons[i][j].setText(text);
 				gridButtons[i][j].setBackground(new Color(getColorForNumber(gameBoard.getValueAtPosition(i, j))));
 			}

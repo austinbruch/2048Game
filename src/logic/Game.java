@@ -45,29 +45,28 @@ public class Game {
 //			}
 //		}
 
-		//		this.gameBoard.setValueAtPosition(0, 0, 4);
-		//		this.gameBoard.setValueAtPosition(0, 1, 2);
-		//		this.gameBoard.setValueAtPosition(0, 2, 4);
-		//		this.gameBoard.setValueAtPosition(0, 3, 4);
-		//		
-		//		this.gameBoard.setValueAtPosition(1, 0, 32);
-		//		this.gameBoard.setValueAtPosition(1, 1, 1024);
-		//		this.gameBoard.setValueAtPosition(1, 2, 2048);
-		//		this.gameBoard.setValueAtPosition(1, 3, 4096);
-		//		
-		//		this.gameBoard.setValueAtPosition(2, 0, 2);
-		//		this.gameBoard.setValueAtPosition(2, 1, 4);
-		//		this.gameBoard.setValueAtPosition(2, 2, 2);
-		//		this.gameBoard.setValueAtPosition(2, 3, 4);
-		//		
-		//		this.gameBoard.setValueAtPosition(3, 0, 4);
-		//		this.gameBoard.setValueAtPosition(3, 1, 2);
-		//		this.gameBoard.setValueAtPosition(3, 2, 4);
-		//		this.gameBoard.setValueAtPosition(3, 3, 2);
-		//		
+				this.gameBoard.setValueAtPosition(0, 0, 4);
+				this.gameBoard.setValueAtPosition(0, 1, 2);
+				this.gameBoard.setValueAtPosition(0, 2, 4);
+				this.gameBoard.setValueAtPosition(0, 3, 4);
+				
+				this.gameBoard.setValueAtPosition(1, 0, 32);
+				this.gameBoard.setValueAtPosition(1, 1, 1024);
+				this.gameBoard.setValueAtPosition(1, 2, 2048);
+				this.gameBoard.setValueAtPosition(1, 3, 512);
+				
+				this.gameBoard.setValueAtPosition(2, 0, 0);
+				this.gameBoard.setValueAtPosition(2, 1, 0);
+				this.gameBoard.setValueAtPosition(2, 2, 0);
+				this.gameBoard.setValueAtPosition(2, 3, 0);
+				
+				this.gameBoard.setValueAtPosition(3, 0, 0);
+				this.gameBoard.setValueAtPosition(3, 1, 0);
+				this.gameBoard.setValueAtPosition(3, 2, 0);
+				this.gameBoard.setValueAtPosition(3, 3, 0);
 
-				this.addNewRandomTile();
-				this.addNewRandomTile();
+//				this.addNewRandomTile();
+//				this.addNewRandomTile();
 		updateUI();
 	}
 

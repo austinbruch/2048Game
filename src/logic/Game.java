@@ -22,12 +22,8 @@ public class Game {
 		gameBoard = new GameBoard();
 		gameFrame = new GameFrame(this);
 		gameFrame.run();
-		//		gameBoard.setValueAtPosition(1, 0, 2);
-		//		gameBoard.setValueAtPosition(1, 1, 2);
-		gameBoard.setValueAtPosition(1, 2, 2);
-		gameBoard.setValueAtPosition(1, 3, 2);
-		gameBoard.setValueAtPosition(2, 2, 2);
-		gameBoard.setValueAtPosition(2, 3, 2);
+		this.addNewRandomTile();
+		this.addNewRandomTile();
 		updateUI();
 	}
 

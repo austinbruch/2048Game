@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,6 +15,7 @@ public class Game {
 	private static int best;
 	private int score;
 	private boolean valid;
+	private static HighScore highScore;
 
 	public Game() {
 		this.score = 0;
@@ -26,14 +29,14 @@ public class Game {
 		gameFrame = new GameFrame(this);
 		gameFrame.run();
 		
-		int value = 2;
-		
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 4; j++) {
-				this.gameBoard.setValueAtPosition(i, j, value);
-				value *= 2;
-			}
-		}
+//		int value = 2;
+//		
+//		for(int i = 0; i < 4; i++) {
+//			for(int j = 0; j < 4; j++) {
+//				this.gameBoard.setValueAtPosition(i, j, value);
+//				value *= 2;
+//			}
+//		}
 		
 //		this.gameBoard.setValueAtPosition(0, 0, 4);
 //		this.gameBoard.setValueAtPosition(0, 1, 2);
@@ -56,14 +59,14 @@ public class Game {
 //		this.gameBoard.setValueAtPosition(3, 3, 2);
 //		
 		
-//		this.addNewRandomTile();
-//		this.addNewRandomTile();
+		this.addNewRandomTile();
+		this.addNewRandomTile();
 		updateUI();
 	}
 
 	public void move(Move direction) {
 
-		if(this.valid) { // this checks if there are moves that can happen on the board
+		if(this.valid) { // this checks if there are any available moves
 			// TODO: still need to check if the selected move is actually valid or not
 			switch(direction) {
 			case LEFT:
@@ -340,10 +343,24 @@ public class Game {
 		return false;
 	}
 
-	public void endGame() {
+	private void endGame() {
 		// when we end the game, brick the board so moves no longer work
 		this.valid = false;
 		gameFrame.endGameDialog();
+	}
+	
+	private void saveHighScore() {
+		HighScore high = new HighScore();
+		high.setScore(this.score);
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		high.setTimestamp(now);
+		
+//		File highScoreFile = new File("/highScore.txt");
+		
+	}
+	
+	private void loadHighScore() {
+		
 	}
 
 	public static void main(String... args) {

@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -27,6 +28,10 @@ import util.Colors;
 
 public class GameFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton[][] gridButtons;
 	private JPanel pane;
 	private Game game;
@@ -165,7 +170,11 @@ public class GameFrame extends JFrame {
 	public void updateUI(GameBoard gameBoard) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				gridButtons[i][j].setText(translateButtonText(gameBoard.getValueAtPosition(i, j)));
+				String text = translateButtonText(gameBoard.getValueAtPosition(i, j));
+				if(text.length() > 3) {
+					gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 40));
+				}
+				gridButtons[i][j].setText(text);
 				gridButtons[i][j].setBackground(new Color(getColorForNumber(gameBoard.getValueAtPosition(i, j))));
 			}
 		}
@@ -230,6 +239,10 @@ public class GameFrame extends JFrame {
 		reference.bestMenu.setText("Best: " + Integer.toString(best));
 	}
 
+	public void endGameDialog() {
+		JOptionPane.showMessageDialog(null, "Game Over", "Game Over", DO_NOTHING_ON_CLOSE);
+	}
+	
 	public void run() {
 		final GameFrame reference = this;
 		EventQueue.invokeLater(new Runnable() {

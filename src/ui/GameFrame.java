@@ -59,6 +59,7 @@ public class GameFrame extends JFrame {
 		exitMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				gameReference.endGame();
 				System.exit(0);
 			}
 		});

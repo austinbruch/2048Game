@@ -33,40 +33,39 @@ public class Game {
 		gameBoard = new GameBoard();
 		gameFrame = new GameFrame(this);
 		loadHighScore();
-		System.out.println("High Score: " + Integer.toString(highScore.getScore()));
 		gameFrame.run();
 
-//		int value = 2;
-//
-//		for(int i = 2; i < 4; i++) {
-//			for(int j = 0; j < 4; j++) {
-//				this.gameBoard.setValueAtPosition(i, j, value);
-//				value *= 2;
-//			}
-//		}
+		//		int value = 2;
+		//
+		//		for(int i = 2; i < 4; i++) {
+		//			for(int j = 0; j < 4; j++) {
+		//				this.gameBoard.setValueAtPosition(i, j, value);
+		//				value *= 2;
+		//			}
+		//		}
 
-				this.gameBoard.setValueAtPosition(0, 0, 4);
-				this.gameBoard.setValueAtPosition(0, 1, 2);
-				this.gameBoard.setValueAtPosition(0, 2, 4);
-				this.gameBoard.setValueAtPosition(0, 3, 4);
-				
-				this.gameBoard.setValueAtPosition(1, 0, 32);
-				this.gameBoard.setValueAtPosition(1, 1, 1024);
-				this.gameBoard.setValueAtPosition(1, 2, 2048);
-				this.gameBoard.setValueAtPosition(1, 3, 512);
-				
-				this.gameBoard.setValueAtPosition(2, 0, 0);
-				this.gameBoard.setValueAtPosition(2, 1, 0);
-				this.gameBoard.setValueAtPosition(2, 2, 0);
-				this.gameBoard.setValueAtPosition(2, 3, 0);
-				
-				this.gameBoard.setValueAtPosition(3, 0, 0);
-				this.gameBoard.setValueAtPosition(3, 1, 0);
-				this.gameBoard.setValueAtPosition(3, 2, 0);
-				this.gameBoard.setValueAtPosition(3, 3, 0);
+		//				this.gameBoard.setValueAtPosition(0, 0, 4);
+		//				this.gameBoard.setValueAtPosition(0, 1, 2);
+		//				this.gameBoard.setValueAtPosition(0, 2, 4);
+		//				this.gameBoard.setValueAtPosition(0, 3, 4);
+		//				
+		//				this.gameBoard.setValueAtPosition(1, 0, 32);
+		//				this.gameBoard.setValueAtPosition(1, 1, 1024);
+		//				this.gameBoard.setValueAtPosition(1, 2, 2048);
+		//				this.gameBoard.setValueAtPosition(1, 3, 512);
+		//				
+		//				this.gameBoard.setValueAtPosition(2, 0, 0);
+		//				this.gameBoard.setValueAtPosition(2, 1, 0);
+		//				this.gameBoard.setValueAtPosition(2, 2, 0);
+		//				this.gameBoard.setValueAtPosition(2, 3, 0);
+		//				
+		//				this.gameBoard.setValueAtPosition(3, 0, 0);
+		//				this.gameBoard.setValueAtPosition(3, 1, 0);
+		//				this.gameBoard.setValueAtPosition(3, 2, 0);
+		//				this.gameBoard.setValueAtPosition(3, 3, 0);
 
-//				this.addNewRandomTile();
-//				this.addNewRandomTile();
+		this.addNewRandomTile();
+		this.addNewRandomTile();
 		updateUI();
 	}
 
@@ -351,11 +350,11 @@ public class Game {
 
 	private void updateUI() {
 		gameFrame.updateUI(gameBoard);
-		gameFrame.setScore(this.score);
-		gameFrame.setBest(highScore.getScore());
 		if(this.score > highScore.getScore()) {
 			highScore.setScore(this.score);
 		}
+		gameFrame.setScore(this.score);
+		gameFrame.setBest(highScore.getScore());
 	}
 
 	private boolean existNextMove() {
@@ -412,20 +411,20 @@ public class Game {
 		System.out.println("endGame entry");
 		// when we end the game, brick the board so moves no longer work
 		this.valid = false;
-		
+
 		if(this.score > highScore.getScore()) {
 			highScore.setScore(this.score);
 		}
 		saveHighScore();
 		gameFrame.endGameDialog();
-		
+
 		System.out.println("endGame exit");
 	}
 
 	private void saveHighScore() {
-		
+
 		System.out.println("saveHighScore entry");
-		
+
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		highScore.setTimestamp(now);
 
@@ -443,7 +442,7 @@ public class Game {
 		{
 			i.printStackTrace();
 		}
-		
+
 		System.out.println("saveHighScore exit");
 	}
 
@@ -451,11 +450,11 @@ public class Game {
 		System.out.println("loadHighScore entry");
 		try
 		{
-			
+
 			FileInputStream fileIn = new FileInputStream("src/highScore.txt");
-				ObjectInputStream in = new ObjectInputStream(fileIn);
-				highScore = (HighScore) in.readObject();
-				in.close();
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			highScore = (HighScore) in.readObject();
+			in.close();
 			fileIn.close();
 		}
 		catch(IOException i)
@@ -466,7 +465,7 @@ public class Game {
 		{
 			c.printStackTrace();
 		}
-		
+
 		System.out.println("loadHighScore exit");
 	}
 

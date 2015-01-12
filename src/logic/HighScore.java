@@ -1,8 +1,11 @@
 package logic;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class HighScore {
+public class HighScore implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int score;
 	private Timestamp timestamp;

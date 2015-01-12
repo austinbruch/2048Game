@@ -22,6 +22,7 @@ import javax.swing.KeyStroke;
 
 import logic.Game;
 import logic.GameBoard;
+import logic.Move;
 import util.Colors;
 
 public class GameFrame extends JFrame {
@@ -112,16 +113,16 @@ public class GameFrame extends JFrame {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					//						JOptionPane.showInternalMessageDialog(pane, "Left was pressed", "Left Arrow Pressed", JOptionPane.INFORMATION_MESSAGE);
-					gameFrameReference.game.moveLeft();
+					gameFrameReference.game.move(Move.LEFT);
 					break;
 				case KeyEvent.VK_RIGHT:
-					gameFrameReference.game.moveRight();
+					gameFrameReference.game.move(Move.RIGHT);
 					break;
 				case KeyEvent.VK_UP: 
-					gameFrameReference.game.moveUp();
+					gameFrameReference.game.move(Move.UP);
 					break;
 				case KeyEvent.VK_DOWN: 
-					gameFrameReference.game.moveDown();
+					gameFrameReference.game.move(Move.DOWN);
 					break;
 				}
 			}

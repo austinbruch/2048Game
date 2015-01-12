@@ -26,9 +26,30 @@ public class Game {
 		this.addNewRandomTile();
 		updateUI();
 	}
+	
+	public void move(Move direction) {
+		
+		switch(direction) {
+		case LEFT:
+			moveLeft();
+			break;
+		case RIGHT:
+			moveRight();
+			break;
+		case UP:
+			moveUp();
+			break;
+		case DOWN:
+			moveDown();
+			break;
+		}
+		
+		addNewRandomTile();
+		// TODO: check the validity of the board, see if there's any possible moves remaining
+	}
 
 
-	public void moveLeft() {
+	private void moveLeft() {
 
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 0; j < 3; j++) { // shift from right to left
@@ -66,10 +87,9 @@ public class Game {
 			}
 		}
 
-		addNewRandomTile();
 	}
 
-	public void moveRight() {
+	private void moveRight() {
 
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 3; j > 0; j--) { // shift from left to right
@@ -107,10 +127,9 @@ public class Game {
 			}
 		}
 
-		addNewRandomTile();
 	}
 
-	public void moveUp() {
+	private void moveUp() {
 
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 0; j < 3; j++) { // shift from right to left
@@ -148,10 +167,9 @@ public class Game {
 			}
 		}
 
-		addNewRandomTile();	
 	}
 
-	public void moveDown() {
+	private void moveDown() {
 
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 3; j > 0; j--) { // shift from left to right
@@ -189,7 +207,6 @@ public class Game {
 			}
 		}
 
-		addNewRandomTile();	
 	}
 
 	private void addNewRandomTile() {

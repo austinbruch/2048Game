@@ -29,14 +29,14 @@ public class Game {
 		gameFrame = new GameFrame(this);
 		gameFrame.run();
 		
-//		int value = 2;
-//		
-//		for(int i = 0; i < 4; i++) {
-//			for(int j = 0; j < 4; j++) {
-//				this.gameBoard.setValueAtPosition(i, j, value);
-//				value *= 2;
-//			}
-//		}
+		int value = 2;
+		
+		for(int i = 2; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				this.gameBoard.setValueAtPosition(i, j, value);
+				value *= 2;
+			}
+		}
 		
 //		this.gameBoard.setValueAtPosition(0, 0, 4);
 //		this.gameBoard.setValueAtPosition(0, 1, 2);
@@ -59,33 +59,36 @@ public class Game {
 //		this.gameBoard.setValueAtPosition(3, 3, 2);
 //		
 		
-		this.addNewRandomTile();
-		this.addNewRandomTile();
+//		this.addNewRandomTile();
+//		this.addNewRandomTile();
 		updateUI();
 	}
 
 	public void move(Move direction) {
 
+		
 		if(this.valid) { // this checks if there are any available moves
-			// TODO: still need to check if the selected move is actually valid or not
+			boolean moved = false; // see if the selected move actually made any tiles move
+			
 			switch(direction) {
 			case LEFT:
-				moveLeft();
+				moved = moveLeft();
 				break;
 			case RIGHT:
-				moveRight();
+				moved = moveRight();
 				break;
 			case UP:
-				moveUp();
+				moved = moveUp();
 				break;
 			case DOWN:
-				moveDown();
+				moved = moveDown();
 				break;
 			}
 
-			addNewRandomTile();
-
-			updateUI();
+			if(moved) { // if any tiles moved, we need to add a new tile and update the UI 
+				addNewRandomTile();
+				updateUI();
+			}
 
 			if(!existNextMove()) {
 				endGame();
@@ -94,12 +97,17 @@ public class Game {
 	}
 
 
-	private void moveLeft() {
+	private boolean moveLeft() {
 
+		boolean moved = false;
+		
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
+						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k+1));
 						gameBoard.setValueAtPosition(i, k+1, 0);
 					}
@@ -111,6 +119,10 @@ public class Game {
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 0; j < 3; j++) { // right to left
 				if(gameBoard.getValueAtPosition(i, j) == gameBoard.getValueAtPosition(i, j+1)) {
+					if(gameBoard.getValueAtPosition(i, j) != 0) {
+						moved = true;
+					}
+					
 					gameBoard.setValueAtPosition(i, j, gameBoard.getValueAtPosition(i, j) * 2);
 
 					// increment the score with the value of the new square created
@@ -125,6 +137,9 @@ public class Game {
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
+						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k+1));
 						gameBoard.setValueAtPosition(i, k+1, 0);
 					}
@@ -132,14 +147,20 @@ public class Game {
 			}
 		}
 
+		return moved;
 	}
 
-	private void moveRight() {
+	private boolean moveRight() {
 
+		boolean moved = false;
+		
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
+						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k-1));
 						gameBoard.setValueAtPosition(i, k-1, 0);
 					}
@@ -151,6 +172,10 @@ public class Game {
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 3; j > 0; j--) { // left to right
 				if(gameBoard.getValueAtPosition(i, j) == gameBoard.getValueAtPosition(i, j-1)) {
+					if(gameBoard.getValueAtPosition(i, j) != 0) {
+						moved = true;
+					}
+					
 					gameBoard.setValueAtPosition(i, j, gameBoard.getValueAtPosition(i, j) * 2);
 
 					// increment the score with the value of the new square created
@@ -165,21 +190,31 @@ public class Game {
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
+						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k-1));
 						gameBoard.setValueAtPosition(i, k-1, 0);
 					}
 				}
 			}
 		}
+		
+		return moved;
 
 	}
 
-	private void moveUp() {
+	private boolean moveUp() {
 
+		boolean moved = false;
+		
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
+						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k+1, i));
 						gameBoard.setValueAtPosition(k+1, i, 0);
 					}
@@ -191,6 +226,10 @@ public class Game {
 		for(int i = 0; i < 4; i++) { // each column
 			for(int j = 0; j < 3; j++) { // top to bottom
 				if(gameBoard.getValueAtPosition(j, i) == gameBoard.getValueAtPosition(j+1, i)) {
+					if(gameBoard.getValueAtPosition(j, i) != 0) {
+						moved = true;
+					}
+					
 					gameBoard.setValueAtPosition(j, i, gameBoard.getValueAtPosition(j, i) * 2);
 
 					// increment the score with the value of the new square created
@@ -205,6 +244,9 @@ public class Game {
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
+						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k+1, i));
 						gameBoard.setValueAtPosition(k+1, i, 0);
 					}
@@ -212,14 +254,21 @@ public class Game {
 			}
 		}
 
+		return moved;
+		
 	}
 
-	private void moveDown() {
+	private boolean moveDown() {
 
+		boolean moved = false;
+		
 		for(int i = 0; i < 4; i++) { // each row
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
+						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k-1, i));
 						gameBoard.setValueAtPosition(k-1, i, 0);
 					}
@@ -231,12 +280,18 @@ public class Game {
 		for(int i = 0; i < 4; i++) { // each column
 			for(int j = 3; j > 0; j--) { // bottom to top
 				if(gameBoard.getValueAtPosition(j, i) == gameBoard.getValueAtPosition(j-1, i)) {
+					
+					if(gameBoard.getValueAtPosition(j, i) != 0) {
+						moved = true;
+					}
+					
 					gameBoard.setValueAtPosition(j, i, gameBoard.getValueAtPosition(j, i) * 2);
 
 					// increment the score with the value of the new square created
 					this.score += gameBoard.getValueAtPosition(j, i);
 
 					gameBoard.setValueAtPosition(j-1, i, 0);
+					
 				}
 			}
 		}
@@ -245,12 +300,17 @@ public class Game {
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
+						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
+							moved = true;
+						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k-1, i));
 						gameBoard.setValueAtPosition(k-1, i, 0);
 					}
 				}
 			}
 		}
+		
+		return moved;
 
 	}
 

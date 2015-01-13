@@ -3,15 +3,17 @@ package logic;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Random;
 
+import storage.HighScore;
+import storage.PastGames;
 import ui.GameFrame;
 import util.Pair;
+import config.Constants;
 
 public class Game {
 
@@ -20,6 +22,7 @@ public class Game {
 	private int score;
 	private boolean valid;
 	private static HighScore highScore;
+	private static PastGames pastGames;
 
 	public Game() {
 		this.score = 0;
@@ -408,7 +411,7 @@ public class Game {
 	}
 
 	public void endGame() {
-		System.out.println("endGame entry");
+//		System.out.println("endGame entry");
 		// when we end the game, brick the board so moves no longer work
 		this.valid = false;
 
@@ -418,19 +421,19 @@ public class Game {
 		saveHighScore();
 		gameFrame.endGameDialog();
 
-		System.out.println("endGame exit");
+//		System.out.println("endGame exit");
 	}
 
 	private void saveHighScore() {
 
-		System.out.println("saveHighScore entry");
+//		System.out.println("saveHighScore entry");
 
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		highScore.setTimestamp(now);
 
 		try
 		{
-			FileOutputStream fileOut = new FileOutputStream("src/highScore.txt");
+			FileOutputStream fileOut = new FileOutputStream(Constants.pathForHighScore);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			System.out.println("High Score: " + Integer.toString(highScore.getScore()));
 			out.writeObject(highScore);
@@ -443,15 +446,15 @@ public class Game {
 			i.printStackTrace();
 		}
 
-		System.out.println("saveHighScore exit");
+//		System.out.println("saveHighScore exit");
 	}
 
 	private void loadHighScore() {
-		System.out.println("loadHighScore entry");
+//		System.out.println("loadHighScore entry");
 		try
 		{
 
-			FileInputStream fileIn = new FileInputStream("src/highScore.txt");
+			FileInputStream fileIn = new FileInputStream(Constants.pathForHighScore);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			highScore = (HighScore) in.readObject();
 			in.close();
@@ -466,7 +469,7 @@ public class Game {
 			c.printStackTrace();
 		}
 
-		System.out.println("loadHighScore exit");
+//		System.out.println("loadHighScore exit");
 	}
 
 	public static void main(String... args) {

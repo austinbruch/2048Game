@@ -177,19 +177,21 @@ public class GameFrame extends JFrame {
 		boolean reached2048 = false;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				String text = translateButtonText(gameBoard.getValueAtPosition(i, j));
-				if(text.length() > 3) {
-					gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 40));
-					if(text.equals("2048")) {
-						reached2048 = true;
+				if(gameBoard.needUpdate(i, j)) {
+					String text = translateButtonText(gameBoard.getValueAtPosition(i, j));
+					if(text.length() > 3) {
+						gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 40));
+						if(text.equals("2048")) {
+							reached2048 = true;
+						}
 					}
+					if(text.length() <= 3) {
+						gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 60));
+					}
+					gridButtons[i][j].setText(text);
+					gridButtons[i][j].setBackground(new Color(getColorForNumber(gameBoard.getValueAtPosition(i, j))));
+					gameBoard.clearUpdate(i, j);
 				}
-				if(text.length() <= 3) {
-					gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 60));
-				}
-				gridButtons[i][j].setText(text);
-				gridButtons[i][j].setBackground(new Color(getColorForNumber(gameBoard.getValueAtPosition(i, j))));
-				
 			}
 		}
 		

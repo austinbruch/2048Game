@@ -375,40 +375,32 @@ public class Game {
 					return true;
 				}
 
-				try {
+				if(i != 0) {
 					if(gameBoard.getValueAtPosition(i-1, j) == current) {
 						// if the cell above the current cell has the same value, we are good
 						return true;
 					}
-				} catch (IndexOutOfBoundsException e) {
-					// eat this
 				}
 
-				try {
+				if(i != 3) {
 					if(gameBoard.getValueAtPosition(i+1, j) == current) {
 						// if the cell below the current cell has the same value, we are good
 						return true;
 					}
-				} catch (IndexOutOfBoundsException e) {
-					// eat this
 				}
 
-				try {
+				if(j != 0) {
 					if(gameBoard.getValueAtPosition(i, j-1) == current) {
 						// if the cell to the left of the current cell has the same value, we are good
 						return true;
 					}
-				} catch (IndexOutOfBoundsException e) {
-					// eat this
 				}
 
-				try {
+				if(j != 3) {
 					if(gameBoard.getValueAtPosition(i, j+1) == current) {
 						// if the cell to the right of the current cell has the same value, we are good
 						return true;
 					}
-				} catch (IndexOutOfBoundsException e) {
-					// eat this
 				}
 			}
 		}

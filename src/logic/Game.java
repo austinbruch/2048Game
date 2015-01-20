@@ -20,18 +20,21 @@ public class Game {
 	private GameBoard gameBoard;
 	private GameFrame gameFrame;
 	private int score;
+	private int moves;
 	private boolean valid;
 	private static HighScore highScore;
 	private static PastGames pastGames;
 
 	public Game() {
 		this.score = 0;
+		this.moves = 0;
 		this.valid = true;
 		highScore = new HighScore();
 	}
 
 	public void startNewGame() {
 		this.score = 0;
+		this.moves = 0;
 		this.valid = true;
 		gameBoard = new GameBoard();
 		gameFrame = new GameFrame(this);
@@ -95,6 +98,7 @@ public class Game {
 			}
 
 			if(moved) { // if any tiles moved, we need to add a new tile and update the UI 
+				this.moves++;
 				addNewRandomTile();
 				updateUI();
 			}
@@ -357,6 +361,7 @@ public class Game {
 		if(this.score > highScore.getScore()) {
 			highScore.setScore(this.score);
 		}
+		gameFrame.setMoves(this.moves);
 		gameFrame.setScore(this.score);
 		gameFrame.setBest(highScore.getScore());
 	}

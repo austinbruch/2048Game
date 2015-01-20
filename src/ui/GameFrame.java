@@ -37,6 +37,7 @@ public class GameFrame extends JFrame {
 	private Game game;
 	private JMenu scoreMenu = new JMenu("Score: ");
 	private JMenu bestMenu = new JMenu("Best: ");
+	private JMenu movesMenu = new JMenu("Moves: ");
 	
 	
 	private static boolean displayedWinningDialog = false;
@@ -99,6 +100,7 @@ public class GameFrame extends JFrame {
 
 		menuBar.add(Box.createHorizontalGlue());
 
+		menuBar.add(movesMenu);
 		menuBar.add(scoreMenu);
 		menuBar.add(bestMenu);
 
@@ -121,7 +123,7 @@ public class GameFrame extends JFrame {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
-					//						JOptionPane.showInternalMessageDialog(pane, "Left was pressed", "Left Arrow Pressed", JOptionPane.INFORMATION_MESSAGE);
+					//JOptionPane.showInternalMessageDialog(pane, "Left was pressed", "Left Arrow Pressed", JOptionPane.INFORMATION_MESSAGE);
 					gameFrameReference.game.move(Move.LEFT);
 					break;
 				case KeyEvent.VK_RIGHT:
@@ -246,14 +248,19 @@ public class GameFrame extends JFrame {
 		}
 	}
 	
+	public void setMoves(int moves) {
+//		final GameFrame reference = this;
+		this.movesMenu.setText("Moves: " + Integer.toString(moves));
+	}
+	
 	public void setScore(int score) {
-		final GameFrame reference = this;
-		reference.scoreMenu.setText("Score: " + Integer.toString(score));
+//		final GameFrame reference = this;
+		this.scoreMenu.setText("Score: " + Integer.toString(score));
 	}
 	
 	public void setBest(int best) {
-		final GameFrame reference = this;
-		reference.bestMenu.setText("Best: " + Integer.toString(best));
+//		final GameFrame reference = this;
+		this.bestMenu.setText("Best: " + Integer.toString(best));
 	}
 
 	public void endGameDialog() {

@@ -67,6 +67,7 @@ public class Game {
 		//				this.gameBoard.setValueAtPosition(3, 2, 0);
 		//				this.gameBoard.setValueAtPosition(3, 3, 0);
 
+
 		this.addNewRandomTile();
 		this.addNewRandomTile();
 		updateUI();
@@ -144,9 +145,9 @@ public class Game {
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
-						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
-							moved = true;
-						}
+						//						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
+						//							moved = true;
+						//						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k+1));
 						gameBoard.setValueAtPosition(i, k+1, 0);
 					}
@@ -197,9 +198,9 @@ public class Game {
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
-						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
-							moved = true;
-						}
+						//						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
+						//							moved = true;
+						//						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k-1));
 						gameBoard.setValueAtPosition(i, k-1, 0);
 					}
@@ -251,9 +252,9 @@ public class Game {
 			for(int j = 0; j < 3; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
-						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
-							moved = true;
-						}
+						//						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
+						//							moved = true;
+						//						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k+1, i));
 						gameBoard.setValueAtPosition(k+1, i, 0);
 					}
@@ -307,9 +308,9 @@ public class Game {
 			for(int j = 3; j > 0; j--) { // shift from left to right
 				for(int k = j; k <= 3; k++) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
-						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
-							moved = true;
-						}
+						//						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
+						//							moved = true;
+						//						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k-1, i));
 						gameBoard.setValueAtPosition(k-1, i, 0);
 					}
@@ -411,7 +412,7 @@ public class Game {
 	}
 
 	public void endGame() {
-//		System.out.println("endGame entry");
+		//		System.out.println("endGame entry");
 		// when we end the game, brick the board so moves no longer work
 		this.valid = false;
 
@@ -421,12 +422,12 @@ public class Game {
 		saveHighScore();
 		gameFrame.endGameDialog();
 
-//		System.out.println("endGame exit");
+		//		System.out.println("endGame exit");
 	}
 
 	private void saveHighScore() {
 
-//		System.out.println("saveHighScore entry");
+		//		System.out.println("saveHighScore entry");
 
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		highScore.setTimestamp(now);
@@ -446,11 +447,11 @@ public class Game {
 			i.printStackTrace();
 		}
 
-//		System.out.println("saveHighScore exit");
+		//		System.out.println("saveHighScore exit");
 	}
 
 	private void loadHighScore() {
-//		System.out.println("loadHighScore entry");
+		//		System.out.println("loadHighScore entry");
 		try
 		{
 
@@ -469,7 +470,7 @@ public class Game {
 			c.printStackTrace();
 		}
 
-//		System.out.println("loadHighScore exit");
+		//		System.out.println("loadHighScore exit");
 	}
 
 	public static void main(String... args) {

@@ -37,6 +37,9 @@ public class GameFrame extends JFrame {
 	private Game game;
 	private JMenu scoreMenu = new JMenu("Score: ");
 	private JMenu bestMenu = new JMenu("Best: ");
+	
+	
+	private static boolean displayedWinningDialog = false;
 
 	public GameFrame(Game game) {
 		this.game = game;
@@ -188,8 +191,9 @@ public class GameFrame extends JFrame {
 			}
 		}
 		
-		if(reached2048) {
+		if(!displayedWinningDialog & reached2048) {
 			reached2048Dialog();
+			displayedWinningDialog = true;
 		}
 	}
 

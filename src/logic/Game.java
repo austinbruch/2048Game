@@ -104,7 +104,7 @@ public class Game {
 			}
 
 			if(!existNextMove()) {
-				endGame();
+				endGame(false);
 			}
 		}
 	}
@@ -408,7 +408,7 @@ public class Game {
 		return false;
 	}
 
-	public void endGame() {
+	public void endGame(boolean userQuit) {
 		//		System.out.println("endGame entry");
 		// when we end the game, brick the board so moves no longer work
 		this.valid = false;
@@ -417,7 +417,9 @@ public class Game {
 			highScore.setScore(this.score);
 		}
 		saveHighScore();
-		gameFrame.endGameDialog();
+		if(!userQuit) {
+			gameFrame.endGameDialog();
+		}
 
 		//		System.out.println("endGame exit");
 	}

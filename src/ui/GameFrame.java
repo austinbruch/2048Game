@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -25,6 +24,7 @@ import logic.Game;
 import logic.GameBoard;
 import logic.Move;
 import util.Colors;
+import config.Constants;
 
 public class GameFrame extends JFrame {
 
@@ -107,9 +107,6 @@ public class GameFrame extends JFrame {
 		// set which menubar we are using for the frame
 		setJMenuBar(menuBar);
 
-		JLabel gameLabel = new JLabel("2048");
-		gameLabel.setFont(new Font("Arial",Font.BOLD, 80));
-		add(gameLabel);
 		addKeyListener(new KeyListener() {
 
 			@Override
@@ -123,7 +120,6 @@ public class GameFrame extends JFrame {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
-					//JOptionPane.showInternalMessageDialog(pane, "Left was pressed", "Left Arrow Pressed", JOptionPane.INFORMATION_MESSAGE);
 					gameFrameReference.game.move(Move.LEFT);
 					break;
 				case KeyEvent.VK_RIGHT:
@@ -147,17 +143,21 @@ public class GameFrame extends JFrame {
 
 
 		JPanel gameBoard = new JPanel();
-		gameBoard.setBorder(BorderFactory.createEmptyBorder(4,4,4,4));
-		gameBoard.setLayout(new GridLayout(4,4,4,4));
+		int borderWidth = 4;
+		int gapBetweenCells = 4;
+		
+		gameBoard.setBorder(BorderFactory.createEmptyBorder(borderWidth, borderWidth, borderWidth, borderWidth));
+		
+		gameBoard.setLayout(new GridLayout(Constants.NUM_COLUMNS, Constants.NUM_ROWS, gapBetweenCells, gapBetweenCells));
 
-		gridButtons = new JButton[4][4];
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		gridButtons = new JButton[Constants.NUM_ROWS][Constants.NUM_COLUMNS];
+		for (int i = 0; i < Constants.NUM_ROWS; i++) {
+			for (int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				final JButton button = new JButton();
 				button.setText("");
 				button.setEnabled(false);
 				button.setOpaque(true);
-				button.setFont(new Font("Arial", Font.BOLD, 60));
+				button.setFont(new Font(Constants.TILE_FONT, Font.BOLD, Constants.TILE_FONT_LARGE));
 				gridButtons[i][j] = button;
 				gameBoard.add(button);
 			}
@@ -167,26 +167,28 @@ public class GameFrame extends JFrame {
 
 		pack();
 
-		setTitle("2048");
-		setSize(500, 500);
+		int windowWidth = 500, windowHeight = 500;
+		
+		setSize(windowWidth, windowHeight);
+		setTitle(Constants.GAME_TITLE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public void updateUI(GameBoard gameBoard) {
 		boolean reached2048 = false;
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < Constants.NUM_ROWS; i++) {
+			for (int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				if(gameBoard.needUpdate(i, j)) {
 					String text = translateButtonText(gameBoard.getValueAtPosition(i, j));
 					if(text.length() > 3) {
-						gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 40));
+						gridButtons[i][j].setFont(new Font(Constants.TILE_FONT, Font.BOLD, Constants.TILE_FONT_SMALL));
 						if(text.equals("2048")) {
 							reached2048 = true;
 						}
 					}
 					if(text.length() <= 3) {
-						gridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 60));
+						gridButtons[i][j].setFont(new Font(Constants.TILE_FONT, Font.BOLD, Constants.TILE_FONT_LARGE));
 					}
 					gridButtons[i][j].setText(text);
 					gridButtons[i][j].setBackground(new Color(getColorForNumber(gameBoard.getValueAtPosition(i, j))));
@@ -210,7 +212,7 @@ public class GameFrame extends JFrame {
 	}
 
 	private int getColorForNumber(int value) {
-		switch( value) {
+		switch(value) {
 		case 0: 
 			return Color.DARK_GRAY.getRGB();
 		case 2: 
@@ -251,17 +253,14 @@ public class GameFrame extends JFrame {
 	}
 	
 	public void setMoves(int moves) {
-//		final GameFrame reference = this;
 		this.movesMenu.setText("Moves: " + Integer.toString(moves));
 	}
 	
 	public void setScore(int score) {
-//		final GameFrame reference = this;
 		this.scoreMenu.setText("Score: " + Integer.toString(score));
 	}
 	
 	public void setBest(int best) {
-//		final GameFrame reference = this;
 		this.bestMenu.setText("Best: " + Integer.toString(best));
 	}
 

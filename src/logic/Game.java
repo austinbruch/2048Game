@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import storage.HighScore;
-import storage.PastGames;
+//import storage.PastGames;
 import ui.GameFrame;
 import util.Pair;
 import config.Constants;
@@ -23,7 +23,7 @@ public class Game {
 	private int moves;
 	private boolean valid;
 	private static HighScore highScore;
-	private static PastGames pastGames;
+//	private static PastGames pastGames;
 
 	public Game() {
 		this.score = 0;
@@ -113,8 +113,8 @@ public class Game {
 
 		boolean moved = false;
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 0; j < 3; j++) { // shift from right to left
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = 0; j < Constants.MAX_COLUMN; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
 						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
@@ -128,8 +128,8 @@ public class Game {
 		}
 
 		// each row is independent
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 0; j < 3; j++) { // right to left
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = 0; j < Constants.MAX_COLUMN; j++) { // right to left
 				if(gameBoard.getValueAtPosition(i, j) == gameBoard.getValueAtPosition(i, j+1)) {
 					if(gameBoard.getValueAtPosition(i, j) != 0) {
 						moved = true;
@@ -145,13 +145,10 @@ public class Game {
 			}
 		}
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 0; j < 3; j++) { // shift from right to left
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = 0; j < Constants.MAX_COLUMN; j++) { // shift from right to left
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
-						//						if(gameBoard.getValueAtPosition(i, k+1) != 0) {
-						//							moved = true;
-						//						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k+1));
 						gameBoard.setValueAtPosition(i, k+1, 0);
 					}
@@ -166,9 +163,9 @@ public class Game {
 
 		boolean moved = false;
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 3; j > 0; j--) { // shift from left to right
-				for(int k = j; k <= 3; k++) {
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = Constants.MAX_COLUMN; j > 0; j--) { // shift from left to right
+				for(int k = j; k <= Constants.MAX_COLUMN; k++) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
 						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
 							moved = true;
@@ -181,8 +178,8 @@ public class Game {
 		}
 
 		// each row is independent
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 3; j > 0; j--) { // left to right
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = Constants.MAX_COLUMN; j > 0; j--) { // left to right
 				if(gameBoard.getValueAtPosition(i, j) == gameBoard.getValueAtPosition(i, j-1)) {
 					if(gameBoard.getValueAtPosition(i, j) != 0) {
 						moved = true;
@@ -198,13 +195,10 @@ public class Game {
 			}
 		}
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 3; j > 0; j--) { // shift from left to right
-				for(int k = j; k <= 3; k++) {
+		for(int i = 0; i < Constants.NUM_ROWS; i++) { // each row
+			for(int j = Constants.MAX_COLUMN; j > 0; j--) { // shift from left to right
+				for(int k = j; k <= Constants.MAX_COLUMN; k++) {
 					if(gameBoard.getValueAtPosition(i, k) == 0) {
-						//						if(gameBoard.getValueAtPosition(i, k-1) != 0) {
-						//							moved = true;
-						//						}
 						gameBoard.setValueAtPosition(i, k, gameBoard.getValueAtPosition(i, k-1));
 						gameBoard.setValueAtPosition(i, k-1, 0);
 					}
@@ -220,8 +214,8 @@ public class Game {
 
 		boolean moved = false;
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 0; j < 3; j++) { // shift from right to left
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = 0; j < Constants.MAX_ROW; j++) { // shift from top to bottom
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
 						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
@@ -235,8 +229,8 @@ public class Game {
 		}
 
 		// each column is independent
-		for(int i = 0; i < 4; i++) { // each column
-			for(int j = 0; j < 3; j++) { // top to bottom
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = 0; j < Constants.MAX_ROW; j++) { // top to bottom
 				if(gameBoard.getValueAtPosition(j, i) == gameBoard.getValueAtPosition(j+1, i)) {
 					if(gameBoard.getValueAtPosition(j, i) != 0) {
 						moved = true;
@@ -252,13 +246,10 @@ public class Game {
 			}
 		}
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 0; j < 3; j++) { // shift from right to left
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = 0; j < Constants.MAX_ROW; j++) { // shift from top to bottom
 				for(int k = j; k >= 0; k--) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
-						//						if(gameBoard.getValueAtPosition(k+1, i) != 0) {
-						//							moved = true;
-						//						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k+1, i));
 						gameBoard.setValueAtPosition(k+1, i, 0);
 					}
@@ -274,9 +265,9 @@ public class Game {
 
 		boolean moved = false;
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 3; j > 0; j--) { // shift from left to right
-				for(int k = j; k <= 3; k++) {
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = Constants.MAX_ROW; j > 0; j--) { // shift from bottom to top
+				for(int k = j; k <= Constants.MAX_ROW; k++) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
 						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
 							moved = true;
@@ -289,8 +280,8 @@ public class Game {
 		}
 
 		// each column is independent
-		for(int i = 0; i < 4; i++) { // each column
-			for(int j = 3; j > 0; j--) { // bottom to top
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = Constants.MAX_ROW; j > 0; j--) { // bottom to top
 				if(gameBoard.getValueAtPosition(j, i) == gameBoard.getValueAtPosition(j-1, i)) {
 
 					if(gameBoard.getValueAtPosition(j, i) != 0) {
@@ -308,13 +299,10 @@ public class Game {
 			}
 		}
 
-		for(int i = 0; i < 4; i++) { // each row
-			for(int j = 3; j > 0; j--) { // shift from left to right
-				for(int k = j; k <= 3; k++) {
+		for(int i = 0; i < Constants.NUM_COLUMNS; i++) { // each column
+			for(int j = Constants.MAX_ROW; j > 0; j--) { // shift from bottom to top
+				for(int k = j; k <= Constants.MAX_ROW; k++) {
 					if(gameBoard.getValueAtPosition(k, i) == 0) {
-						//						if(gameBoard.getValueAtPosition(k-1, i) != 0) {
-						//							moved = true;
-						//						}
 						gameBoard.setValueAtPosition(k, i, gameBoard.getValueAtPosition(k-1, i));
 						gameBoard.setValueAtPosition(k-1, i, 0);
 					}
@@ -330,8 +318,8 @@ public class Game {
 		int value;
 		ArrayList<Pair<Integer,Integer>> empties = new ArrayList<Pair<Integer,Integer>>();
 
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 4; j++) {
+		for(int i = 0; i < Constants.NUM_ROWS; i++) {
+			for(int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				if(this.gameBoard.getValueAtPosition(i, j) == 0) {
 					empties.add(new Pair<Integer,Integer>(new Integer(i), new Integer(j)));
 				}
@@ -368,8 +356,8 @@ public class Game {
 
 	private boolean existNextMove() {
 
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 4; j++) {
+		for(int i = 0; i < Constants.NUM_ROWS; i++) {
+			for(int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				int current = gameBoard.getValueAtPosition(i, j);
 				if(current == 0) { // if there are any blank spaces, then we know there is at least 1 valid move remaining
 					return true;
@@ -382,7 +370,7 @@ public class Game {
 					}
 				}
 
-				if(i != 3) {
+				if(i != Constants.MAX_ROW) {
 					if(gameBoard.getValueAtPosition(i+1, j) == current) {
 						// if the cell below the current cell has the same value, we are good
 						return true;
@@ -396,7 +384,7 @@ public class Game {
 					}
 				}
 
-				if(j != 3) {
+				if(j != Constants.MAX_COLUMN) {
 					if(gameBoard.getValueAtPosition(i, j+1) == current) {
 						// if the cell to the right of the current cell has the same value, we are good
 						return true;
@@ -433,7 +421,7 @@ public class Game {
 
 		try
 		{
-			FileOutputStream fileOut = new FileOutputStream(Constants.pathForHighScore);
+			FileOutputStream fileOut = new FileOutputStream(Constants.PATH_FOR_HIGH_SCORE);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			System.out.println("High Score: " + Integer.toString(highScore.getScore()));
 			out.writeObject(highScore);
@@ -454,7 +442,7 @@ public class Game {
 		try
 		{
 
-			FileInputStream fileIn = new FileInputStream(Constants.pathForHighScore);
+			FileInputStream fileIn = new FileInputStream(Constants.PATH_FOR_HIGH_SCORE);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			highScore = (HighScore) in.readObject();
 			in.close();

@@ -1,15 +1,17 @@
 package logic;
 
+import config.Constants;
+
 public class GameBoard {
 
 	private int[][] boardMatrix;
 	private boolean[][] needsUpdating;
 	
 	public GameBoard() {
-		boardMatrix = new int[4][4];
-		needsUpdating = new boolean[4][4];
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		boardMatrix = new int[Constants.NUM_ROWS][Constants.NUM_COLUMNS];
+		needsUpdating = new boolean[Constants.NUM_ROWS][Constants.NUM_COLUMNS];
+		for (int i = 0; i < Constants.NUM_ROWS; i++) {
+			for (int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				boardMatrix[i][j] = 0;
 				needsUpdating[i][j] = true;
 			}
@@ -25,8 +27,8 @@ public class GameBoard {
 	}
 	
 	public void setValueAtPosition(int row, int column, int value) {
-		if(row < 4 && row >= 0) {
-			if(column < 4 && column >= 0) {
+		if(row < Constants.NUM_ROWS && row >= 0) {
+			if(column < Constants.NUM_COLUMNS && column >= 0) {
 				if(boardMatrix[row][column] != value) {
 					boardMatrix[row][column] = value;
 					needsUpdating[row][column] = true;
@@ -40,8 +42,8 @@ public class GameBoard {
 	}
 	
 	public int getValueAtPosition(int row, int column) {
-		if(row < 4 && row >= 0) {
-			if(column < 4 && column >= 0) {
+		if(row < Constants.NUM_ROWS && row >= 0) {
+			if(column < Constants.NUM_COLUMNS && column >= 0) {
 				return boardMatrix[row][column];
 			} else {
 				System.out.println("Column value " + column + " is out of range.");
@@ -55,8 +57,8 @@ public class GameBoard {
 	public String toString() {
 		String toReturn  = "";
 		
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < Constants.NUM_ROWS; i++) {
+			for (int j = 0; j < Constants.NUM_COLUMNS; j++) {
 				toReturn += Integer.toString(boardMatrix[i][j]) + "\t"; 
 			}
 			toReturn += "\n";
@@ -74,6 +76,5 @@ public class GameBoard {
 		gb.setValueAtPosition(3, 3, 4);
 		
 		System.out.println(gb);
-		
 	}
 }
